@@ -1,8 +1,9 @@
-Flask
-Flask-Login
-Flask-Cors
-Flask-SQLAlchemy
-python-dotenv
-openai
-gunicorn
-psycopg2-binary
+Flask==3.0.3
+Flask-Login==0.6.3
+Flask-Cors==4.0.1
+Flask-SQLAlchemy==3.1.1
+SQLAlchemy==2.0.32
+python-dotenv==1.0.1
+openai==1.51.0
+gunicorn==21.2.0
+psycopg2-binary==2.9.9
