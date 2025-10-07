@@ -123,3 +123,122 @@ html[data-theme="light"] body{ background: radial-gradient(1200px 800px at 80% -
 html[data-theme="light"] .glass{ background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.6)); backdrop-filter: blur(12px); }
 html[data-theme="light"] .avatar{ background:#eef1ff; border-color:#d3d8ff; color:#3a3f77; }
 html[data-theme="light"] .chat-input-row textarea{ background:#fff; border-color:#d3d8ff; color:#0f1225; }
+
+/* -------------------------
+   Mobile-first improvements
+   ------------------------- */
+
+/* Respect mobile browser chrome (keyboard, URL bar) */
+:root {
+  --vh: 1dvh; /* dynamic viewport unit for modern mobile */
+}
+
+/* Hide mobile-only controls on larger screens */
+.mobile-only { display: none; }
+
+/* Chat layout defaults (desktop already ok) */
+.chat-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
+  min-height: calc(100dvh - 120px); /* header+footer space */
+}
+
+/* Make input row “sticky” at bottom */
+.chat-input-row {
+  position: sticky;
+  bottom: 0;
+  background: var(--panel, rgba(255,255,255,.04));
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+/* Make the chat scroll well */
+.chat-log {
+  overflow: auto;
+  max-height: calc(100dvh - 280px); /* room for header + tips + input */
+}
+
+/* -------------------------
+   Breakpoint: tablets/phones
+   ------------------------- */
+@media (max-width: 768px) {
+  /* show the hamburger button */
+  .mobile-only { display: inline-flex; }
+
+  /* Stack the layout: panel first, sidebar becomes a drawer */
+  .chat-layout {
+    display: block;
+    min-height: calc(100dvh - 96px);
+  }
+
+  /* Drawer-style sidebar (off-canvas) */
+  .chat-aside {
+    position: fixed;
+    top: 56px;                /* below header */
+    left: -290px;             /* hidden by default */
+    width: 260px;
+    height: calc(100dvh - 56px);
+    background: var(--panel, rgba(0,0,0,.35));
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255,255,255,.08);
+    padding: 14px 16px;
+    z-index: 40;
+    transition: left .25s ease;
+  }
+  body.aside-open .chat-aside { left: 0; }
+
+  /* Optional: simple overlay when drawer open */
+  body.aside-open::after {
+    content: "";
+    position: fixed;
+    inset: 56px 0 0 0;
+    background: rgba(0,0,0,.35);
+    z-index: 30;
+  }
+
+  /* Chat panel fills the screen */
+  .chat-panel {
+    margin: 0;
+    padding: 12px;
+    min-height: calc(100dvh - 96px);
+  }
+
+  /* Better scroll area for messages */
+  .chat-log {
+    max-height: unset;
+    height: calc(100dvh - 56px - 56px - 72px); /* header - footer - input */
+  }
+
+  /* Bigger tap targets & fonts */
+  .btn { padding: 10px 14px; font-size: 15px; }
+  .icon-btn { width: 40px; height: 40px; }
+  textarea#prompt { font-size: 16px; line-height: 1.35; }
+
+  /* Landing page hero stacks nicely */
+  .hero {
+    display: block;
+    padding: 18px;
+    text-align: left;
+  }
+  .hero .hero-copy h1 { font-size: clamp(22px, 6vw, 30px); }
+  .hero .lead { font-size: 15px; }
+  .hero .cta-row .btn { display: block; width: 100%; margin: 8px 0; }
+}
+
+/* Tiny phones */
+@media (max-width: 380px) {
+  .chat-aside { width: 236px; left: -266px; }
+  body.aside-open .chat-aside { left: 0; }
+  .name, .time { font-size: 12px; }
+  .bubble { font-size: 14px; }
+}
+
+/* Improve iOS keyboard behavior (prevents jumpy scroll) */
+@supports (-webkit-touch-callout: none) {
+  .chat-log { overscroll-behavior: contain; }
+}
+
+/* Ensure text contrast in light mode */
+html[data-theme="light"] .chat-input-row { background: rgba(255,255,255,.9); }

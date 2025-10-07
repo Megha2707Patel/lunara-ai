@@ -22,6 +22,8 @@
         <span class="brand-mark">🌙</span> <span>Lunara <b>AI</b></span>
       </a>
 
+      <button id="aside-toggle" class="btn icon-btn mobile-only" aria-label="Toggle menu">☰</button>
+
     <nav class="nav-links">
         <a href="{{ url_for('home') }}">Home</a>
         <a href="{{ url_for('chat') }}">App</a>
@@ -77,6 +79,33 @@
       set(localStorage.getItem(key)||'dark');
       btn.onclick=()=>{ const t=(root.getAttribute('data-theme')==='dark'?'light':'dark'); localStorage.setItem(key,t); set(t); };
     })();
+
+    // mobile chat sidebar toggle
+    (function () {
+        const btn = document.getElementById('aside-toggle');
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+        document.body.classList.toggle('aside-open');
+        });
+    })();
+
+    (function () {
+    const btn = document.getElementById('aside-toggle');
+    if (!btn) return;
+    const toggle = () => document.body.classList.toggle('aside-open');
+    btn.addEventListener('click', toggle);
+
+    // close when tapping the overlay or a sidebar link
+    document.addEventListener('click', (e) => {
+      if (!document.body.classList.contains('aside-open')) return;
+      const aside = document.querySelector('.chat-aside');
+      const clickedInside = aside && aside.contains(e.target);
+      const clickedButton = e.target === btn;
+      if (!clickedInside && !clickedButton) {
+        document.body.classList.remove('aside-open');
+      }
+    }, true);
+  })();
   </script>
 </body>
 </html>
