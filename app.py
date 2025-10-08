@@ -123,3 +123,7 @@ with app.app_context():
 if __name__ == "__main__":
     # For local dev. In Render, Gunicorn runs this app via Procfile.
     app.run(debug=True)
+
+@app.route("/health")
+def health():
+    return "ok", 200
