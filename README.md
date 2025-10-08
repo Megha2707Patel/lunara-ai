@@ -2,6 +2,7 @@
 🚀 An AI-powered web chatbot built using Flask, OpenAI API, and SQLAlchemy, designed for interactive, secure, and personalized chat experiences.
 
 **Live DEMO:** https://lunara-ai-cnct.onrender.com/
+
 **⚠️ Note:** The app may take 30–50 seconds to load initially because Render’s free server sleeps after inactivity.
 Once it wakes up, the chatbot will run smoothly 💬✨
 
