@@ -11,7 +11,7 @@ It features secure authentication, chat history management, and a responsive UI 
 
 ## 🧠 Core Features
 
-- 🤖 **AI-Powered Chatting:** Real-time interaction using `gpt-3.5-turbo`
+- 🤖 **AI-Powered Chatting:** Real-time interaction using `gpt-4o-mini`
 - 🔐 **User Authentication:** Secure login & signup with Flask-Login
 - 💬 **Chat History:** Stores every user & bot conversation persistently
 - 📱 **Responsive UI:** Fully optimized for desktop, tablet, and mobile
