@@ -1,6 +1,8 @@
 🌙 Lunara AI — Illuminate Your Conversations with Intelligence
 🚀 An AI-powered web chatbot built using Flask, OpenAI API, and SQLAlchemy, designed for interactive, secure, and personalized chat experiences.
 
+**Live DEMO:** https://lunara-ai-cnct.onrender.com/
+
 🧠 Overview
 Lunara AI is an intelligent chatbot web application that leverages the OpenAI API to deliver conversational experiences similar to ChatGPT.
 It features secure authentication, chat history management, and a responsive UI — optimized for desktop and mobile devices.
